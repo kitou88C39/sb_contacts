@@ -1,5 +1,6 @@
 package com.example.contacts.controllers;
 
+import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,5 +38,21 @@ public class PersonController {
         }
         repository.saveAndFlush(person);
         return "redirect:/";
+    }
+
+    // 初期データの投入
+    @PostConstruct
+    public void dataInit() {
+        Person suzuki = new Person();
+        suzuki.setName("鈴木");
+        suzuki.setAge(23);
+        suzuki.setEmail("suzuki@email.com");
+        repository.saveAndFlush(suzuki);
+
+        Person sato = new Person();
+        sato.setName("佐藤");
+        sato.setAge(20);
+        sato.setEmail("sato@email.com");
+        repository.saveAndFlush(sato);
     }
 }
